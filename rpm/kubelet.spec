@@ -1,5 +1,5 @@
 %global KUBE_VERSION 1.6.4
-%global CNI_RELEASE 0799f5732f2a11b329d9e3d51b9c8f2e3759f2ff
+%global CNI_RELEASE 0.5.2
 %global RPM_RELEASE 0
 %global ARCH amd64
 
@@ -15,8 +15,7 @@ Source1: kubelet.service
 Source2: https://dl.k8s.io/v%{KUBE_VERSION}/bin/linux/%{ARCH}/kubectl
 Source3: https://dl.k8s.io/v%{KUBE_VERSION}/bin/linux/%{ARCH}/kubeadm
 Source4: 10-kubeadm.conf
-Source5: https://dl.k8s.io/network-plugins/cni-%{ARCH}-%{CNI_RELEASE}.tar.gz
-
+Source5: https://github.com/containernetworking/cni/releases/download/v%{CNI_RELEASE}/cni-%{ARCH}-v%{CNI_RELEASE}.tgz
 
 BuildRequires: curl
 Requires: iptables >= 1.4.21
@@ -33,7 +32,7 @@ The node agent of Kubernetes, the container cluster manager.
 
 %package -n kubernetes-cni
 
-Version: 0.5.1
+Version: %{CNI_RELEASE}
 Release: %{RPM_RELEASE}
 Summary: Binaries required to provision kubernetes container networking
 Requires: kubelet
@@ -121,6 +120,9 @@ mv bin/ %{buildroot}/opt/cni/
 
 
 %changelog
+* Tue May 30 2017 Lucas Käldström <lucas.kaldstrom@hotmail.co.uk> - 0.5.2
+- Bump CNI to v0.5.2
+
 * Fri May 19 2017 Jacob Beacham <beacham@google.com> - 1.6.4
 - Bump version of kubelet and kubectl to v1.6.4.
 

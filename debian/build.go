@@ -21,7 +21,7 @@ const (
 	ChannelUnstable ChannelType = "unstable"
 	ChannelNightly  ChannelType = "nightly"
 
-	cniVersion = "0.5.1"
+	cniVersion = "0.5.2"
 )
 
 type work struct {
